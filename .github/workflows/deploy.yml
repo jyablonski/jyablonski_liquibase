@@ -1,0 +1,25 @@
+name: Liquibase Deploy
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    name: Deploy Liquibase Changes
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+
+      - uses: liquibase-github-actions/update@v4.23.0
+        with:
+          changelogFile: "db_changelog.xml"
+          url: ${{ secrets.DB_URL }}
+          username: ${{ secrets.DB_USERNAME }}
+          password: ${{ secrets.DB_PASSWORD }}
+          headless: true
+          # licenseKey: ${{ secrets.LIQUIBASE_LICENSE_KEY }}
+          logLevel: INFO
