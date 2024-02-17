@@ -1,0 +1,33 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+        http://www.liquibase.org/xml/ns/pro
+        http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="add-column-role-to-rest_api_users" author="jyablonski">
+        <!-- Preconditions to check if the column does not exist -->
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists schemaName="nba_prod" tableName="rest_api_users" columnName="modified_at"/>
+            </not>
+        </preConditions>
+
+        <!-- Add the new column -->
+        <addColumn schemaName="nba_prod" tableName="rest_api_users">
+            <column name="modified_at" type="TIMESTAMP" defaultValueComputed="now()">
+            </column>
+        </addColumn>
+
+        <!-- Rollback to drop the column if it was added -->
+        <rollback>
+            <dropColumn schemaName="nba_prod" tableName="rest_api_users" columnName="modified_at"/>
+        </rollback>
+    </changeSet>
+
+</databaseChangeLog>

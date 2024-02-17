@@ -21,6 +21,8 @@
 `liquibase update-sql --url=$url --username=$username --password=$password`
 `liquibase rollback-count --count=1 --url=$url --username=$username --password=$password`
 
+`liquibase clear-checksums --url=$url --username=$username --password=$password`
+
 # Articles
 [Link](https://faun.pub/passwords-in-your-liquibase-github-actions-big-no-no-8b52510d438d)
 
