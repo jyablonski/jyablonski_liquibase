@@ -13,6 +13,12 @@ services:
       - ${PWD}/docker/postgres_bootstrap.sql:/docker-entrypoint-initdb.d/postgres_bootstrap.sql
     networks:
       - liquibase_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      retries: 5
+      timeout: 5s
+
   liquibase:
     build:
       context: ../
@@ -23,7 +29,8 @@ services:
       - USERNAME=postgres
       - PASSWORD=postgres
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy # Wait for postgres service to be healthy
     links:
       - postgres:postgres
     volumes:
