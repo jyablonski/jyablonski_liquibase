@@ -30,13 +30,12 @@ services:
       - PASSWORD=postgres
     depends_on:
       postgres:
-        condition: service_healthy # Wait for postgres service to be healthy
+        condition: service_healthy
     links:
       - postgres:postgres
     volumes:
       - ${PWD}:/home
     command: liquibase --url=jdbc:postgresql://postgres:5432/postgres?currentSchema=public --username=postgres --password=postgres update
-    # command: ["tail", "-f", "/dev/null"]
     networks:
       - liquibase_network
     # restart: always
