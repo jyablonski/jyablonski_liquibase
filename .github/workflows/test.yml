@@ -1,0 +1,16 @@
+name: Test Pipeline
+
+on:
+  pull_request:
+
+jobs:
+  test_pipeline:
+    name: Test Pipeline
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the Repo
+        uses: actions/checkout@v2
+
+      - name: Run Tests
+        run: |
+          make test

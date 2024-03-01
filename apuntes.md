@@ -23,6 +23,17 @@
 
 `liquibase clear-checksums --url=$url --username=$username --password=$password`
 
+`liquibase update-sql --url=$URL --username=$USERNAME --password=$PASSWORD`
+`liquibase update --url=$URL --username=$USERNAME --password=$PASSWORD`
 # Articles
 [Link](https://faun.pub/passwords-in-your-liquibase-github-actions-big-no-no-8b52510d438d)
 
+
+`internal/lib/postgresql.jar`
+
+liquibase update --url=$URL --username=$USERNAME --password=$PASSWORD
+jdbc:postgresql://postgres:5432/postgres?currentSchema=public
+postgres
+postgres
+
+`https://rnemet.dev/posts/docker/compose-app/`

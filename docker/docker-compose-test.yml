@@ -1,0 +1,44 @@
+version: "3"
+services:
+  postgres:
+    image: postgres:14-alpine
+    container_name: postgres
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+    volumes:
+      - ${PWD}/docker/postgres_bootstrap.sql:/docker-entrypoint-initdb.d/postgres_bootstrap.sql
+    networks:
+      - liquibase_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      retries: 5
+      timeout: 5s
+
+  liquibase:
+    build:
+      context: ../
+      dockerfile: docker/Dockerfile
+    # this shit didnt fkn work mate
+    environment:
+      - URL=jdbc:postgresql://postgres:5432/postgres?currentSchema=public
+      - USERNAME=postgres
+      - PASSWORD=postgres
+    depends_on:
+      postgres:
+        condition: service_healthy
+    links:
+      - postgres:postgres
+    volumes:
+      - ${PWD}:/home
+    command: liquibase --url=jdbc:postgresql://postgres:5432/postgres?currentSchema=public --username=postgres --password=postgres update
+    networks:
+      - liquibase_network
+    # restart: always
+
+networks:
+  liquibase_network:
