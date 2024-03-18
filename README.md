@@ -7,7 +7,12 @@ Version: 0.1.2
 Repo to store, run, and manage Liquibase Migrations
 
 ## Running Locally
-Clone the Repo & run `make up` which will run all migrations but leave the Postgres Database running afterwards to view the resources.
+Clone the Repo & run `make up` which will spin up a Bootstrapped Postgres Database and run all migrations.  The Postgres Database will be left up afterwards to view any changes.
+- Username: `postgres`
+- Password: `postgres`
+- Host: `localhost`
+- Database: `postgres`
+- Port: `5432`
 
 When finished run `make down`.
 
