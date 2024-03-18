@@ -8,5 +8,6 @@ create table public.department(
 );
 
 create table nba_prod.rest_api_users(
-    id serial
+    id serial,
+    username varchar(55)
 );
