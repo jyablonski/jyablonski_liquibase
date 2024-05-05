@@ -25,6 +25,13 @@
 
 `liquibase update-sql --url=$URL --username=$USERNAME --password=$PASSWORD`
 `liquibase update --url=$URL --username=$USERNAME --password=$PASSWORD`
+
+
+``` sh
+liquibase update-sql --url=jdbc:postgresql://localhost:5432/postgres?currentSchema=public --username=postgres --password=postgres
+
+liquibase update --url=jdbc:postgresql://localhost:5432/postgres?currentSchema=public --username=postgres --password=postgres
+```
 # Articles
 [Link](https://faun.pub/passwords-in-your-liquibase-github-actions-big-no-no-8b52510d438d)
 
