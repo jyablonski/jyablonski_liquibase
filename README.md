@@ -2,7 +2,7 @@
 ![Badge](https://github.com/jyablonski/jyablonski_liquibase/actions/workflows/deploy.yml/badge.svg)
 
 
-Version: 0.1.3
+Version: 0.1.4
 
 Repo to store, run, and manage Liquibase Migrations
 
