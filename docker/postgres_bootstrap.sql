@@ -11,3 +11,9 @@ create table nba_prod.rest_api_users(
     id serial,
     username varchar(55)
 );
+
+CREATE TABLE nba_prod.feedback(
+    id serial primary key,
+    feedback character varying,
+	time timestamp default now()
+);
