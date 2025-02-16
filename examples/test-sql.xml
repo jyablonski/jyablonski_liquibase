@@ -1,5 +1,5 @@
-<?xml version="1.1" encoding="UTF-8" standalone="no"?>
-<databaseChangeLog
+<!-- <?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog 
     xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
     xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
     xmlns:pro="http://www.liquibase.org/xml/ns/pro"
@@ -9,20 +9,23 @@
         http://www.liquibase.org/xml/ns/pro
         http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd
         http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
-    <changeSet author="jacob" id="2023-07-25-shiny-test">
+    <changeSet author="jacob" id="2023-07-25-department-test">
     <preConditions onFail="MARK_RAN">
-        <not>
-            <tableExists tableName="shiny_feature_flags_test" schemaName="public"/>
-        </not>
-        </preConditions>
-        <createTable tableName="shiny_feature_flags_test" schemaName="public">
-            <column name="id" type="serial" autoIncrement="true">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="flag_type" type="text"/>
-        </createTable>
+        <sqlCheck expectedResult="0">
+            select count(*)
+            from information_schema.columns
+            where table_schema = 'public' 
+                and table_name = 'department'
+                and column_name = 'created_at';
+        </sqlCheck>
+    </preConditions>
+
+    <sql>
+        alter table public.department add column created_at timestamp default now();
+    </sql>
+
     <rollback>
-        <dropTable tableName="shiny_feature_flags_test" schemaName="public"/>
+        alter table public.department drop column created_at;
     </rollback>
 </changeSet>
-</databaseChangeLog>
+</databaseChangeLog> -->

@@ -13,27 +13,27 @@
     <changeSet id="add-timestamps-to-feedback" author="jyablonski">
         <preConditions onFail="MARK_RAN">
             <not>
-                <columnExists schemaName="nba_prod" tableName="feedback" columnName="created_at"/>
-                <columnExists schemaName="nba_prod" tableName="feedback" columnName="modified_at"/>
+                <columnExists schemaName="marts" tableName="feedback" columnName="created_at"/>
+                <columnExists schemaName="marts" tableName="feedback" columnName="modified_at"/>
             </not>
         </preConditions>
-        <addColumn schemaName="nba_prod" tableName="feedback">
+        <addColumn schemaName="marts" tableName="feedback">
             <column name="created_at" type="TIMESTAMP" defaultValueComputed="now()">
             </column>
         </addColumn>
 
-        <addColumn schemaName="nba_prod" tableName="feedback">
+        <addColumn schemaName="marts" tableName="feedback">
             <column name="modified_at" type="TIMESTAMP" defaultValueComputed="now()">
             </column>
         </addColumn>
 
-        <dropColumn schemaName="nba_prod" tableName="feedback" columnName="time"/>
+        <dropColumn schemaName="marts" tableName="feedback" columnName="time"/>
 
         <rollback>
-            <dropColumn schemaName="nba_prod" tableName="feedback" columnName="created_at"/>
-            <dropColumn schemaName="nba_prod" tableName="feedback" columnName="modified_at"/>
+            <dropColumn schemaName="marts" tableName="feedback" columnName="created_at"/>
+            <dropColumn schemaName="marts" tableName="feedback" columnName="modified_at"/>
 
-            <addColumn schemaName="nba_prod" tableName="feedback">
+            <addColumn schemaName="marts" tableName="feedback">
                 <column name="time" type="TIMESTAMP" defaultValueComputed="now()">
                 </column>
             </addColumn>
