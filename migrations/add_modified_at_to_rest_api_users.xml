@@ -14,19 +14,19 @@
         <!-- Preconditions to check if the column does not exist -->
         <preConditions onFail="MARK_RAN">
             <not>
-                <columnExists schemaName="nba_prod" tableName="rest_api_users" columnName="modified_at"/>
+                <columnExists schemaName="marts" tableName="rest_api_users" columnName="modified_at"/>
             </not>
         </preConditions>
 
         <!-- Add the new column -->
-        <addColumn schemaName="nba_prod" tableName="rest_api_users">
+        <addColumn schemaName="marts" tableName="rest_api_users">
             <column name="modified_at" type="TIMESTAMP" defaultValueComputed="now()">
             </column>
         </addColumn>
 
         <!-- Rollback to drop the column if it was added -->
         <rollback>
-            <dropColumn schemaName="nba_prod" tableName="rest_api_users" columnName="modified_at"/>
+            <dropColumn schemaName="marts" tableName="rest_api_users" columnName="modified_at"/>
         </rollback>
     </changeSet>
 

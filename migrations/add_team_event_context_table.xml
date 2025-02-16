@@ -13,11 +13,11 @@
     <changeSet id="add-team-reddit-events-table" author="jyablonski">
         <preConditions onFail="MARK_RAN">
             <not>
-                <tableExists schemaName="nba_prod" tableName="team_event_context"/>
+                <tableExists schemaName="marts" tableName="team_event_context"/>
             </not>
         </preConditions>
 
-        <createTable schemaName="nba_prod" tableName="team_event_context">
+        <createTable schemaName="marts" tableName="team_event_context">
             <column name="id" type="SERIAL" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -39,7 +39,7 @@
         </createTable>
 
         <rollback>
-            <dropTable schemaName="nba_prod" tableName="team_event_context"/>
+            <dropTable schemaName="marts" tableName="team_event_context"/>
         </rollback>
     </changeSet>
 

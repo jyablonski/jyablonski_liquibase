@@ -13,17 +13,17 @@
     <changeSet id="add-index-to-rest_api_users" author="jyablonski">
         <preConditions onFail="MARK_RAN">
         <not>
-            <indexExists schemaName="nba_prod" tableName="rest_api_users" indexName="username_rest_api_users_index"
+            <indexExists schemaName="marts" tableName="rest_api_users" indexName="username_rest_api_users_index"
                          columnNames="username"/>
         </not>
         </preConditions>
 
-        <createIndex clustered="false" schemaName="nba_prod" tableName="rest_api_users" indexName="username_rest_api_users_index">
+        <createIndex clustered="false" schemaName="marts" tableName="rest_api_users" indexName="username_rest_api_users_index">
             <column descending="false" name="username"/>
         </createIndex>
 
         <rollback>
-            <dropIndex schemaName="nba_prod" tableName="rest_api_users" indexName="username_rest_api_users_index"/>
+            <dropIndex schemaName="marts" tableName="rest_api_users" indexName="username_rest_api_users_index"/>
         </rollback>
     </changeSet>
 

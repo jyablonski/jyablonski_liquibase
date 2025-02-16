@@ -14,12 +14,12 @@
         <!-- Preconditions to check if the column does not exist -->
         <preConditions onFail="MARK_RAN">
             <not>
-                <columnExists schemaName="nba_prod" tableName="rest_api_users" columnName="role"/>
+                <columnExists schemaName="marts" tableName="rest_api_users" columnName="role"/>
             </not>
         </preConditions>
 
         <!-- Add the new column -->
-        <addColumn schemaName="nba_prod" tableName="rest_api_users">
+        <addColumn schemaName="marts" tableName="rest_api_users">
             <column name="role" type="VARCHAR(255)" defaultValue="Consumer">
                 <constraints nullable="false"/>
             </column>
@@ -27,7 +27,7 @@
 
         <!-- Rollback to drop the column if it was added -->
         <rollback>
-            <dropColumn schemaName="nba_prod" tableName="rest_api_users" columnName="role"/>
+            <dropColumn schemaName="marts" tableName="rest_api_users" columnName="role"/>
         </rollback>
     </changeSet>
 
